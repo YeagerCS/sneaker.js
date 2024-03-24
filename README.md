@@ -299,7 +299,7 @@ Now we receive the data in our TableComponent. Only thing that's missing is to [
 For this to work properly, you'll need to have a table structure like this:
 
 Table.html
-```
+```html
 <table id="table">
     <thead>
       <tr>
