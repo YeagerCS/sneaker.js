@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node application.cjs",
-    "gc": "node scripts/npm/gc.cjs"
+    "gc": "node scripts/npm/gc.cjs",
+    "gs": "node scripts/npm/gs.cjs"
   },
   "keywords": [],
   "author": "",

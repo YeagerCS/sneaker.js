@@ -25,8 +25,8 @@ class AppComponent extends TheComponent{
         const path = window.location.pathname;
 
         const routes = {
-            "/": WelcomeComponent
-        }
+            "/": WelcomeComponent,
+        } 
         
 
           

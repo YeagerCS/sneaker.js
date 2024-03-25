@@ -101,7 +101,7 @@ export const populateTable = (table, tableData, action = null) => {
         
   tableBody.innerHTML = "";
 
-  tableData.forEach(data => {
+  tableData && tableData.forEach(data => {
       const row = document.createElement("tr")
 
       if(action){
@@ -144,4 +144,25 @@ export const asLocalStorage = (inital, name) => {
 
   const proxy = new Proxy(data, handler)
   return proxy;
+}
+
+export const renderEach = (arrayObj, attach, inElem, elem = "div", action = null) => {
+  const attachToElem = document.getElementById(attach)
+  arrayObj && arrayObj.forEach((obj) => {
+    const element = document.createElement(inElem)
+
+    if(action){
+      element.addEventListener("click", () => {
+        action(obj)
+      })
+    }
+
+    Object.keys(data).forEach(key => {
+      const cell = document.createElement(elem)
+      cell.textContent = data[key]
+      element.appendChild(cell)
+    })
+
+    attachToElem.appendChild(element)
+  })
 }
