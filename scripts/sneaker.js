@@ -1,3 +1,5 @@
+import InputBind from "./models/InputBind.js";
+
 const PATH_PREFIX = "src/components/";
 
 const fetchComponent = async (component, callback) => {
@@ -40,8 +42,15 @@ export const render = async (Component, parent) => {
   const component = new Component();
   const html = await initHtml(component.name);
   initRender(html, parent);
+  setTitle(component.title)
   component.onRender();
 };
+
+const setTitle = (title) => {
+  if(title){
+    document.title = title;
+  }
+}
 
 export const initCss = async (script) => {
   const response = await fetch(
@@ -120,7 +129,25 @@ export const populateTable = (table, tableData, action = null) => {
   })
 }
 
-export const asLocalStorage = (inital, name) => {
+export const uuid = () => {
+  const hex = "abcdef0123456789"
+  const pattern = [8, 4, 4, 4, 12];
+  let uuid = ""
+
+  pattern.forEach((length, index) => {
+    for(let i = 0; i <length; i++){
+      uuid += hex[Math.floor(Math.random() * hex.length)]
+    }
+
+    if(index < pattern.length - 1){
+      uuid += "-"
+    }
+  })
+
+  return uuid;
+}
+
+export const asLocalStorage = (inital, name = uuid()) => {
   let data = JSON.parse(localStorage.getItem(name)) || inital;
 
   const handler = {
@@ -165,4 +192,19 @@ export const renderEach = (arrayObj, attach, inElem, elem = "div", action = null
 
     attachToElem.appendChild(element)
   })
+}
+
+export const bindInputs = (object) => {
+  Object.keys(object).forEach(key => {
+    object[key] = new InputBind(key)
+  })
+}
+
+// Maps keys in objects which are InputBind instances to the values of the input bind
+export const values = (object) => {
+  return Object.keys(object).reduce((valueObject, key) => {
+    const inputBind = object[key]
+    valueObject[key] = inputBind.value;
+    return valueObject;
+  }, {})
 }

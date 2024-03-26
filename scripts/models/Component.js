@@ -1,8 +1,10 @@
 class TheComponent {
     name;
+    title;
 
     constructor(){
         this.bindMethods()
+        this.title = null;
     }
 
     async init(){

@@ -12,6 +12,7 @@ class InputBind {
         this.value = ""
         document.getElementById(this.elem).value = this.value;
     }
+
 }
 
 export default InputBind;
