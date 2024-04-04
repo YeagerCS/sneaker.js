@@ -6,8 +6,8 @@ const componentName = process.argv[2]
 const componentExport = `${componentName.toUpperCase()}${componentName.toLowerCase().includes("component") ? "" : "_COMPONENT"}`;
 
 
-const jsTemplate = `import { initCss } from "../../../scripts/sneaker.snkr";
-import TheComponent from "../../../scripts/models/Component.snkr";
+const jsTemplate = `import { initCss } from "../../../scripts/sneaker.js";
+import TheComponent from "../../../scripts/models/Component.js";
 
 class ${componentName}Component extends TheComponent {
     constructor(){

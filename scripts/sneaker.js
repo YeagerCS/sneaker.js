@@ -1,4 +1,4 @@
-import InputBind from "./models/InputBind.snkr";
+import InputBind from "./models/InputBind.js";
 
 const PATH_PREFIX = "src/components/";
 
@@ -207,4 +207,39 @@ export const values = (object) => {
     valueObject[key] = inputBind.value;
     return valueObject;
   }, {})
+}
+
+export const validate = (inputObj, 
+  pwRegex = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/g,
+  pwKey = "password", emailKey = "email"
+  ) => {
+  Object.keys(inputObj).forEach(key => {
+    if(!inputObj[key]){
+      return false;
+    }
+
+    if(key === pwKey){
+      if(!inputObj[key].match(pwRegex)){
+        return false;
+      }
+    }
+
+    if(key === emailKey){
+      const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+      if(!inputObj[key].match(emailRegex)){
+        return false;
+      }
+    }
+  })
+
+  return true;
+}
+
+export const applyStyles = (...styles) => {
+  let styleString = "";
+
+  for(let val of styles){
+    styleString += `${val}${val.endsWith(";") ? "" : ";"}\n`;
+  }
+  return styleString;
 }

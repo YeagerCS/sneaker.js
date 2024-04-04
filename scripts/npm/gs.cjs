@@ -3,7 +3,7 @@ const path = require("path")
 const serviceName = process.argv[2]
 
 
-const jsTemplate = `import TheService from "../../../scripts/models/Service.snkr";
+const jsTemplate = `import TheService from "../../../scripts/models/Service.js";
 class ${serviceName}Service extends TheService{
     static instance = null;
 

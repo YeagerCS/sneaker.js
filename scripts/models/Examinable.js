@@ -2,7 +2,6 @@ class Examinable {
     constructor(value = null){
         this.value = value;
         this.subscribers = []
-        this.errorCallbacks = []
     }
 
     sneak(extend, error = null){
@@ -39,6 +38,26 @@ class Examinable {
         } catch(error){
             this.enter(error)
         }
+    }
+
+    socket(url, onClose = null, onOpen = null) {
+        const webSocket = new WebSocket(url)
+
+        webSocket.addEventListener("open", (e) => {
+            onOpen && onOpen()
+        })
+
+        webSocket.addEventListener("message", (e) => {
+            this.enter(e.data)
+        })
+
+        webSocket.addEventListener("error", (e) => {
+            this.enter(new Error("Websocket error: " + e.target))
+        })
+
+        webSocket.addEventListener("close", (e) => {
+            onClose && onClose()
+        })
     }
 
     enter(newValue){

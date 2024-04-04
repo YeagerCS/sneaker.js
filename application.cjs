@@ -5,6 +5,7 @@ const fs = require("fs")
 const app = express();
 
 const indexPath = path.join(__dirname, 'index.html');
+const distDir = path.join(__dirname, 'dist');
 const pathExceptions = ["/src", "/scripts", "/node_modules", "/src/components"]
 const color = {
   "blue": '\x1b[1;34m',
@@ -46,11 +47,19 @@ const color = {
 
 app.use((req, res, next) => {
   const urlPath = path.join(__dirname, req.path);
-  if(urlPath.endsWith(".snkr") || urlPath.endsWith(".sneaker")) {
+  if(urlPath.endsWith(".snkr") || urlPath.endsWith(".sneaker") 
+  || urlPath.endsWith(".tsnkr") || urlPath.endsWith(".tsneaker")) {
     res.type("application/javascript")
     res.sendFile(urlPath);
   } else{
-    next();
+    if(urlPath.endsWith(".ts")){
+      const filename = req.path.split('/').pop().split('.').shift().replace(".ts", "");
+      const jsUrlPath = distDir + "/" + filename + ".js";
+      res.type("application/javascript")
+      res.sendFile(jsUrlPath)
+    } else{
+      next();
+    }
   }
 })
 

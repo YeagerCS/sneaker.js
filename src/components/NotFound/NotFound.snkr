@@ -1,5 +1,5 @@
-import { initCss } from "../../../scripts/sneaker.snkr";
-import TheComponent from "../../../scripts/models/Component.snkr";
+import { initCss } from "../../../scripts/sneaker.js";
+import TheComponent from "../../../scripts/models/Component.js";
 
 class NotFoundComponent extends TheComponent {
     constructor(){

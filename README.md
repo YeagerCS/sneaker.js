@@ -49,10 +49,6 @@ class ComponentnameComponent extends TheComponent {
         await initCss("Componentname.css");
         // Your initialization logic
     }
-
-    onRender(){
-        this.init();
-    }
 }
 
 export { ComponentnameComponent };
@@ -70,8 +66,7 @@ Lets break it down:
   - Binding Buttons
   - Binding Input
   - Initializing the Css file (is generated)
-  - etc.
-- `onRender()` gets called when the component renders. You don't need to modify that method.
+  - etc.  
 
 ## Rendering Components
 You can render components inside of other components. Here's how:
@@ -151,12 +146,9 @@ class AppComponent extends TheComponent{
         await initCss("App.css")
 
         this.routes();
-    }
-
-    onRender(){
-        this.init()
         enableRoutes(this.routes)
     }
+
 
     async routes(){
         const path = window.location.pathname;

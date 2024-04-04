@@ -16,5 +16,7 @@
     "esm": "^3.2.25",
     "express": "^4.19.1",
     "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
   }
 }
