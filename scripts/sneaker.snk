@@ -1,4 +1,4 @@
-import InputBind from "./models/InputBind.js";
+import InputBind from "./models/InputBind";
 
 const PATH_PREFIX = "src/components/";
 

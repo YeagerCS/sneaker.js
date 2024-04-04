@@ -27,15 +27,15 @@ Sneaker.js is a JavaScript library which inspires features from JavaScript frame
 3. Go to http://127.0.0.1:3000 (or your env port)
 
 ## Components
-To start editting the application, you can go to `src/components/App/App.js` and modify the routes. In order to have routes, you'll need to generate components.
+To start editting the application, you can go to `src/components/App/App` and modify the routes. In order to have routes, you'll need to generate components.
 
 - Generate components with `npm run gc Componentname`
 
 This will create a component with a css, html and js file. The js file gets generated with it's base structure:
 
 ```js
-import { initCss, render } from "../../../scripts/sneaker.js";
-import TheComponent from "../../../scripts/models/Component.js";
+import { initCss, render } from "../../../scripts/sneaker";
+import TheComponent from "../../../scripts/models/Component";
 
 class ComponentnameComponent extends TheComponent {
     constructor(){
@@ -87,7 +87,7 @@ The elements in which you want to render, require an id. You use the elements `i
 `npm run gc Form`    
 `npm run gc Table`
 
-Form.js
+Form.snk
 ```js
 class FormComponent extends TheComponent {
   // Default structure
@@ -99,7 +99,7 @@ Form.html
 <p>Form Html</p>
 ```
 
-Table.js
+Table.snk
 ```js
 class TableComponent extends TheComponent {
   // Default structure
@@ -112,13 +112,13 @@ Table.html
 ```
 
 
-Once you have those components, you want to render them in the DashboardComponent. For that, go to Dashboard.js:
+Once you have those components, you want to render them in the DashboardComponent. For that, go to Dashboard.snk:
 
-Dashboard.js
+Dashboard.snk
 ```js
-import { initCss, render } from "../../../scripts/sneaker.js";
-import { FormComponent } from "../Form/Form.js";
-import { TableComponent } from "../Table/Table.js";
+import { initCss, render } from "../../../scripts/sneaker";
+import { FormComponent } from "../Form/Form";
+import { TableComponent } from "../Table/Table";
 
 ...
 // In the init method
@@ -135,7 +135,7 @@ You successfully rendered two components inside another! Now you just have to di
 
 
 ## Routing
-The router is placed in `App.js` and you need to configure your routes there. The default structure of the AppComponent is as follows:
+The router is placed in `App.snk` and you need to configure your routes there. The default structure of the AppComponent is as follows:
 
 ```js
 // imports
@@ -188,7 +188,7 @@ Great! Now you're rendering the Dashboard on the page. You're still missing some
 
 
 ## Form Input
-Lets go and accept input from our form. For that, go to Form.js. Lets say we have to input a name and an email.
+Lets go and accept input from our form. For that, go to Form.snk. Lets say we have to input a name and an email.
 
 Form.html
 ```html
@@ -196,9 +196,9 @@ Form.html
 <input type="email" id="email" name="email" required>
 ```
 
-Form.js
+Form.snk
 ```js
-import InputBind from "../../../scripts/models/InputBind.js";
+import InputBind from "../../../scripts/models/InputBind";
 // Other imports
 
 class FormComponent extends TheComponent {
@@ -234,9 +234,9 @@ Form.html
 ```
 We know want to bind that button to an action. Lets say we just want to console.log or inputs. Here's how you can do it:
 
-Form.js
+Form.snk
 ```js
-import { bindButton, ... } from "../../../scripts/sneaker.js";
+import { bindButton, ... } from "../../../scripts/sneaker";
 
 // ...
 
@@ -258,9 +258,9 @@ Instead of logging to the console, lets try and [display our added person in the
 ## Emitting Data
 You can emit data as an event in order to access it in another component. Let's say we want to emit the person with name and email and receive it within the TableComponent.
 
-Form.js
+Form.snk
 ```js
-import { bindButton, emit, ... } from "../../../scripts/sneaker.js";
+import { bindButton, emit, ... } from "../../../scripts/sneaker";
 
 // ...
 
@@ -277,9 +277,9 @@ submitForm(e){
 ```
 Now it emitted the object under the name 'emitEventName'. In the table component, you can receive it.
 
-Table.js
+Table.snk
 ```js
-import { receive, ... } from "../../../scripts/sneaker.js";
+import { receive, ... } from "../../../scripts/sneaker";
 
 // ...
 tableData = [];
@@ -314,9 +314,9 @@ Table.html
 ```
 Define the headers that you need, but leave the tbody blank. Here's how you display the data:
 
-Table.js
+Table.snk
 ```js
-import { receive, populateTable, ... } from "../../../scripts/sneaker.js";
+import { receive, populateTable, ... } from "../../../scripts/sneaker";
 
 // ...
 tableData = [];
@@ -343,9 +343,9 @@ Just like that you are displaying the data that gets emitted into the table. If 
 ## asLocalStorage
 Serialize your 'tableData' in localStorage with one simple change:
 
-Table.js
+Table.snk
 ```js
-import { asLocalStorage, populateTable, ... } from "../../../scripts/sneaker.js";
+import { asLocalStorage, populateTable, ... } from "../../../scripts/sneaker";
 
 // ...
 

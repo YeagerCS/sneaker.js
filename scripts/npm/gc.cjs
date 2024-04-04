@@ -6,8 +6,8 @@ const componentName = process.argv[2]
 const componentExport = `${componentName.toUpperCase()}${componentName.toLowerCase().includes("component") ? "" : "_COMPONENT"}`;
 
 
-const jsTemplate = `import { initCss } from "../../../scripts/sneaker.js";
-import TheComponent from "../../../scripts/models/Component.js";
+const jsTemplate = `import { initCss } from "../../../scripts/sneaker";
+import TheComponent from "../../../scripts/models/Component";
 
 class ${componentName}Component extends TheComponent {
     constructor(){
@@ -46,7 +46,7 @@ try{
 
     fs.mkdirSync(dirPath)
 
-    const filenameJS = path.join(dirPath, componentName + ".js");
+    const filenameJS = path.join(dirPath, componentName + ".snk");
     fs.writeFileSync(filenameJS, jsTemplate);
 
     const filenameCSS = path.join(dirPath, componentName + ".css")

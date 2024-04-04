@@ -1,5 +1,5 @@
-import { initialRender } from "./scripts/sneaker.js"
-import { AppComponent } from "./src/components/App/App.js"
+import { initialRender } from "./scripts/sneaker"
+import { AppComponent } from "./src/components/App/App"
 
 
 const load = async () => {

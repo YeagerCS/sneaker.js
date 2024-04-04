@@ -1,4 +1,4 @@
-import { setInput } from "../sneaker.js";
+import { setInput } from "../sneaker";
 
 class InputBind {
     value;
