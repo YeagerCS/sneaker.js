@@ -11,9 +11,10 @@ class TheComponent {
         throw new Error('init method must be implemented in component');
     }
 
-    onRender(){
-        throw new Error('onRender method must be implemented in component');
-    }
+    // Depracted
+    // onRender(){
+    //     throw new Error('onRender method must be implemented in component');
+    // }
 
     bindMethods() {
         for (let key of Object.getOwnPropertyNames(Object.getPrototypeOf(this))) {

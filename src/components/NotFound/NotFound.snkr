@@ -1,5 +1,5 @@
-import { initCss } from "../../../scripts/sneaker";
-import TheComponent from "../../../scripts/models/Component";
+import { initCss } from "../../../scripts/sneaker.snkr";
+import TheComponent from "../../../scripts/models/Component.snkr";
 
 class NotFoundComponent extends TheComponent {
     constructor(){
@@ -10,10 +10,6 @@ class NotFoundComponent extends TheComponent {
 
     async init(){
         await initCss("NotFound.css");
-    }
-
-    onRender(){
-        this.init();
     }
 }
 

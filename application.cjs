@@ -12,32 +12,46 @@ const color = {
   "underline": "\x1b[4m"
 }
 
-const sendFileIfExists = (req, res, next, filePaths, index = 0) => {
-  if (index >= filePaths.length) {
-    return next();
-  }
+// const sendFileIfExists = (req, res, next, filePaths, index = 0) => {
+//   if (index >= filePaths.length) {
+//     return next();
+//   }
 
-  const filePath = filePaths[index];
-  fs.access(filePath, fs.constants.F_OK, (err) => {
-    if (!err) {
-      res.type("application/javascript");
-      return res.sendFile(filePath);
-    } else {
-      return sendFileIfExists(req, res, next, filePaths, index + 1);
-    }
-  });
-};
+//   const filePath = filePaths[index];
+//   fs.access(filePath, fs.constants.F_OK, (err) => {
+//     if (!err) {
+//       res.type("application/javascript");
+//       return res.sendFile(filePath);
+//     } else {
+//       return sendFileIfExists(req, res, next, filePaths, index + 1);
+//     }
+//   });
+// };
 
+
+// app.use((req, res, next) => {
+//   const urlPath = path.join(__dirname, req.path);
+//   const jsFilePath = `${urlPath}.js`;
+//   const snkFilePath = `${urlPath}.snkr`;
+//   const sneakerFilePath = `${urlPath}.sneaker`;
+  
+//   const filePaths = [jsFilePath, snkFilePath, sneakerFilePath];
+
+//   sendFileIfExists(req, res, next, filePaths);
+// })
+
+// app.get("/", (req, res) => {
+//   res.sendFile(indexPath)
+// })
 
 app.use((req, res, next) => {
   const urlPath = path.join(__dirname, req.path);
-  const jsFilePath = `${urlPath}.js`;
-  const snkFilePath = `${urlPath}.snk`;
-  const sneakerFilePath = `${urlPath}.sneaker`;
-  
-  const filePaths = [jsFilePath, snkFilePath, sneakerFilePath];
-
-  sendFileIfExists(req, res, next, filePaths);
+  if(urlPath.endsWith(".snkr") || urlPath.endsWith(".sneaker")) {
+    res.type("application/javascript")
+    res.sendFile(urlPath);
+  } else{
+    next();
+  }
 })
 
 app.get("/", (req, res) => {

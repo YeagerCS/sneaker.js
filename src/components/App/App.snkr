@@ -1,7 +1,7 @@
-import { enableRoutes, initCss, render } from "../../../scripts/sneaker";
-import TheComponent from "../../../scripts/models/Component";
-import { NotFoundComponent } from "../NotFound/NotFound";
-import { WelcomeComponent } from "../Welcome/Welcome";
+import { enableRoutes, initCss, render } from "../../../scripts/sneaker.snkr";
+import TheComponent from "../../../scripts/models/Component.snkr";
+import { WelcomeComponent } from "../Welcome/Welcome.snkr";
+import { NotFoundComponent } from "../NotFound/NotFound.snkr";
 
 class AppComponent extends TheComponent{
     constructor(){
@@ -14,10 +14,6 @@ class AppComponent extends TheComponent{
         await initCss("App.css")
 
         this.routes();
-    }
-
-    onRender(){
-        this.init()
         enableRoutes(this.routes)
     }
 
@@ -28,8 +24,6 @@ class AppComponent extends TheComponent{
             "/": WelcomeComponent,
         } 
         
-
-          
         await render(routes[path] ?? NotFoundComponent, "router")
     }
 }

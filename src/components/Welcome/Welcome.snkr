@@ -1,5 +1,5 @@
-import { initCss } from "../../../scripts/sneaker";
-import TheComponent from "../../../scripts/models/Component";
+import { initCss } from "../../../scripts/sneaker.snkr";
+import TheComponent from "../../../scripts/models/Component.snkr";
 
 class WelcomeComponent extends TheComponent {
     constructor(){
@@ -10,11 +10,6 @@ class WelcomeComponent extends TheComponent {
 
     async init(){
         await initCss("Welcome.css");
-        // Your initialization logic
-    }
-
-    onRender(){
-        this.init();
     }
 }
 

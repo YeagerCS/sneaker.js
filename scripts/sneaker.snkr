@@ -1,4 +1,4 @@
-import InputBind from "./models/InputBind";
+import InputBind from "./models/InputBind.snkr";
 
 const PATH_PREFIX = "src/components/";
 
@@ -21,7 +21,7 @@ export const initialRender = async (Component, parent) => {
     htmlComponent.innerHTML = html;
 
     app.appendChild(htmlComponent);
-    component.onRender();
+    component.init();
   });
 };
 
@@ -43,7 +43,7 @@ export const render = async (Component, parent) => {
   const html = await initHtml(component.name);
   initRender(html, parent);
   setTitle(component.title)
-  component.onRender();
+  component.init();
 };
 
 const setTitle = (title) => {

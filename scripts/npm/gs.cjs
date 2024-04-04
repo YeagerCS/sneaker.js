@@ -3,29 +3,22 @@ const path = require("path")
 const serviceName = process.argv[2]
 
 
-const jsTemplate = `import Examinable from "../../../scripts/models/Examinable";
-import TheService from "../../../scripts/models/Service";
+const jsTemplate = `import TheService from "../../../scripts/models/Service.snkr";
 class ${serviceName}Service extends TheService{
     static instance = null;
-
-    yourExaminableΔ;
 
     constructor(){
         super();
 
         if(!${serviceName}Service.instance){
-            this.yourExaminableΔ = new Examinable();
-
             ${serviceName}Service.instance = this;
+
+            // Initialization logic here
         }
 
         return ${serviceName}Service.instance;
     }
 
-
-    updateExaminable(value){
-        this.yourExaminableΔ.enter(value)
-    }
 }
 
 export default new ${serviceName}Service();

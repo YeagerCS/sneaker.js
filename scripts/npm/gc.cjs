@@ -6,8 +6,8 @@ const componentName = process.argv[2]
 const componentExport = `${componentName.toUpperCase()}${componentName.toLowerCase().includes("component") ? "" : "_COMPONENT"}`;
 
 
-const jsTemplate = `import { initCss } from "../../../scripts/sneaker";
-import TheComponent from "../../../scripts/models/Component";
+const jsTemplate = `import { initCss } from "../../../scripts/sneaker.snkr";
+import TheComponent from "../../../scripts/models/Component.snkr";
 
 class ${componentName}Component extends TheComponent {
     constructor(){
@@ -20,15 +20,10 @@ class ${componentName}Component extends TheComponent {
         await initCss("${componentName}.css");
         // Your initialization logic
     }
-
-    onRender(){
-        this.init();
-    }
 }
 
 export { ${componentName}Component };
 `;
-
 
 
 if(!componentName){
@@ -46,7 +41,7 @@ try{
 
     fs.mkdirSync(dirPath)
 
-    const filenameJS = path.join(dirPath, componentName + ".snk");
+    const filenameJS = path.join(dirPath, componentName + ".snkr");
     fs.writeFileSync(filenameJS, jsTemplate);
 
     const filenameCSS = path.join(dirPath, componentName + ".css")

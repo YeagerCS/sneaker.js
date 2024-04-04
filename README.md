@@ -88,7 +88,7 @@ The elements in which you want to render, require an id. You use the elements `i
 `npm run gc Form`    
 `npm run gc Table`
 
-Form.snk
+Form.snkr
 ```js
 class FormComponent extends TheComponent {
   // Default structure
@@ -100,7 +100,7 @@ Form.html
 <p>Form Html</p>
 ```
 
-Table.snk
+Table.snkr
 ```js
 class TableComponent extends TheComponent {
   // Default structure
@@ -113,9 +113,9 @@ Table.html
 ```
 
 
-Once you have those components, you want to render them in the DashboardComponent. For that, go to Dashboard.snk:
+Once you have those components, you want to render them in the DashboardComponent. For that, go to Dashboard.snkr:
 
-Dashboard.snk
+Dashboard.snkr
 ```js
 import { initCss, render } from "../../../scripts/sneaker";
 import { FormComponent } from "../Form/Form";
@@ -136,7 +136,7 @@ You successfully rendered two components inside another! Now you just have to di
 
 
 ## Routing
-The router is placed in `App.snk` and you need to configure your routes there. The default structure of the AppComponent is as follows:
+The router is placed in `App.snkr` and you need to configure your routes there. The default structure of the AppComponent is as follows:
 
 ```js
 // imports
@@ -189,7 +189,7 @@ Great! Now you're rendering the Dashboard on the page. You're still missing some
 
 
 ## Form Input
-Lets go and accept input from our form. For that, go to Form.snk. Lets say we have to input a name and an email.
+Lets go and accept input from our form. For that, go to Form.snkr. Lets say we have to input a name and an email.
 
 Form.html
 ```html
@@ -197,7 +197,7 @@ Form.html
 <input type="email" id="email" name="email" required>
 ```
 
-Form.snk
+Form.snkr
 ```js
 import InputBind from "../../../scripts/models/InputBind";
 // Other imports
@@ -235,7 +235,7 @@ Form.html
 ```
 We know want to bind that button to an action. Lets say we just want to console.log or inputs. Here's how you can do it:
 
-Form.snk
+Form.snkr
 ```js
 import { bindButton, ... } from "../../../scripts/sneaker";
 
@@ -259,7 +259,7 @@ Instead of logging to the console, lets try and [display our added person in the
 ## Emitting Data
 You can emit data as an event in order to access it in another component. Let's say we want to emit the person with name and email and receive it within the TableComponent.
 
-Form.snk
+Form.snkr
 ```js
 import { bindButton, emit, ... } from "../../../scripts/sneaker";
 
@@ -278,7 +278,7 @@ submitForm(e){
 ```
 Now it emitted the object under the name 'emitEventName'. In the table component, you can receive it.
 
-Table.snk
+Table.snkr
 ```js
 import { receive, ... } from "../../../scripts/sneaker";
 
@@ -315,7 +315,7 @@ Table.html
 ```
 Define the headers that you need, but leave the tbody blank. Here's how you display the data:
 
-Table.snk
+Table.snkr
 ```js
 import { receive, populateTable, ... } from "../../../scripts/sneaker";
 
@@ -344,7 +344,7 @@ Just like that you are displaying the data that gets emitted into the table. If 
 ## asLocalStorage
 Serialize your 'tableData' in localStorage with one simple change:
 
-Table.snk
+Table.snkr
 ```js
 import { asLocalStorage, populateTable, ... } from "../../../scripts/sneaker";
 
