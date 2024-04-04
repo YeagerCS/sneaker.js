@@ -11,6 +11,7 @@
 - [Emitting Data](#emitting-data)
 - [Display Table Data](#display-table-data)
 - [asLocalStorage](#aslocalstorage)
+- [Examinable](#examinable)
 
 
 ## <p id="sneakerjs">What is sneaker.js</p>
@@ -358,6 +359,9 @@ updateTable(){
 // ...
 ```
 The first parameter is the inital value for the variable, which is just an empty array here and the second parameter requires a unique identifier with which it is saved in localstorage. Just like that your data persists between sessions locally.
+
+## Examinable
+Coming soon...
 
 ## Conclusion
 That is the first documentation of sneaker.js and might be expanded upon in the future.
