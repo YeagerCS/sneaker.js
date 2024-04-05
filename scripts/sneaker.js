@@ -173,10 +173,17 @@ export const asLocalStorage = (inital, name = uuid()) => {
   return proxy;
 }
 
-export const renderEach = (arrayObj, attach, inElem, elem = "div", action = null) => {
+export const renderEach = ({data, attach, elem = "div", style = null, subElem = "div", action = null}) => {
   const attachToElem = document.getElementById(attach)
-  arrayObj && arrayObj.forEach((obj) => {
-    const element = document.createElement(inElem)
+  if(!style){
+    style = `
+    display: flex;
+    gap: 5px;
+    `;
+  }
+  data && data.forEach((obj) => {
+    const element = document.createElement(elem)
+    element.style = style;
 
     if(action){
       element.addEventListener("click", () => {
@@ -184,9 +191,9 @@ export const renderEach = (arrayObj, attach, inElem, elem = "div", action = null
       })
     }
 
-    Object.keys(data).forEach(key => {
-      const cell = document.createElement(elem)
-      cell.textContent = data[key]
+    Object.keys(obj).forEach(key => {
+      const cell = document.createElement(subElem)
+      cell.textContent = obj[key]
       element.appendChild(cell)
     })
 
