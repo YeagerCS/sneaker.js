@@ -353,8 +353,58 @@ updateTable(){
 ```
 The first parameter is the inital value for the variable, which is just an empty array here and the second parameter requires a unique identifier with which it is saved in localstorage. Just like that your data persists between sessions locally.
 
-## Examinable
-Coming soon...
+## Services & Examinables
+### Services
+The examinable is supposed to have similar functionality as an [Observable](https://angular.io/guide/observables) in angular, although it's heavily simplified. You can use examinables in context of services, like in angular. Generate a service with  
+```
+npm run gs serviceName
+```
+The simple structure of such a service is the following: 
+
+src/services/EmployeeService.js
+```js
+import TheService from "../../../scripts/models/Service.js";
+class EmployeeService extends TheService{
+    static instance = null;
+
+    constructor(){
+        super();
+
+        if(!EmployeeService.instance){
+            Employee.Service.instance = this;
+
+            // Initialization logic here
+        }
+
+        return EmployeeService.instance;
+    }
+
+}
+
+export default new EmployeeService();
+```
+This structure exports a service instance and makes it available in any file. In this services you can define your examinables.
+### Examinable
+```js
+class EmployeeService extends TheService{
+    static instance = null;
+    #employeeExaminable; // declare an examinable with a # before the name to make it private
+
+    constructor(){
+        super();
+
+        if(!EmployeeService.instance){
+            Employee.Service.instance = this;
+
+            this.#employeeExaminable = new Examinable(); // instanciate it
+        }
+
+        return EmployeeService.instance;
+    }
+
+}
+```
+
 
 ## Problem
 The files in the `script` folder were supposed to be uploaded as an npm package to use it in the app. I published a package called 'sneakerlib' which you can now install with `npm i sneakerlib`, but you can't actually use it in sneaker.js. The problem lays within the express server. The express server serves the index.html file on each route and serves other files on routes where they exist. You cann check `application.cjs`. Now, when trying to import a npm package, due to the express server, it can't import it because it searches for it locally.  
@@ -362,4 +412,5 @@ Like if you import `import { v4 } from "uuid"`, it tries to import `127.0.0.1:30
 I tried to bundle the application with parcel, but parcel introduces several new problems which basically invalidate half the progress up until this point. I'll try some more things, but for now **you are not able to use npm packages** and you need to use the sneaker.js files from the scripts directory instead of the 'sneakerlib'.
 
 ## Conclusion
-That is the first documentation of sneaker.js and might be expanded upon in the future.
+That is the first documentation of sneaker.js and might be expanded upon in the future.   
+(There are a few useful methods not yet documented inside of `/scripts/sneaker.js`)
