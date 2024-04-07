@@ -12,6 +12,7 @@
 - [Display Table Data](#display-table-data)
 - [asLocalStorage](#aslocalstorage)
 - [Examinable](#examinable)
+- [Problem](#problem)
 
 
 ## <p id="sneakerjs">What is sneaker.js</p>
@@ -354,6 +355,11 @@ The first parameter is the inital value for the variable, which is just an empty
 
 ## Examinable
 Coming soon...
+
+## Problem
+The files in the `script` folder were supposed to be uploaded as an npm package to use it in the app. I published a package called 'sneakerlib' which you can now install with `npm i sneakerlib`, but you can't actually use it in sneaker.js. The problem lays within the express server. The express server serves the index.html file on each route and serves other files on routes where they exist. You cann check `application.cjs`. Now, when trying to import a npm package, due to the express server, it can't import it because it searches for it locally.  
+Like if you import `import { v4 } from "uuid"`, it tries to import `127.0.0.1:3000uuid`, which obviously doesn't work.  
+I tried to bundle the application with parcel, but parcel introduces several new problems which basically invalidate half the progress up until this point. I'll try some more things, but for now **you are not able to use npm packages** and you need to use the sneaker.js files from the scripts directory instead of the 'sneakerlib'.
 
 ## Conclusion
 That is the first documentation of sneaker.js and might be expanded upon in the future.
