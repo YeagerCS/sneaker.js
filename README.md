@@ -29,15 +29,15 @@ Sneaker.js is a JavaScript library which inspires features from JavaScript frame
 3. Go to http://127.0.0.1:3000 (or your env port)
 
 ## Components
-To start editting the application, you can go to `src/components/App/App` and modify the routes. In order to have routes, you'll need to generate components.
+To start editting the application, you can go to `src/components/App/App.snkr` and modify the routes. In order to have routes, you'll need to generate components.
 
 - Generate components with `npm run gc Componentname`
 
 This will create a component with a css, html and js file. The js file gets generated with it's base structure:
 
 ```js
-import { initCss, render } from "../../../scripts/sneaker";
-import TheComponent from "../../../scripts/models/Component";
+import { initCss, render } from "../../../scripts/sneaker.js";
+import TheComponent from "../../../scripts/models/Component.js";
 
 class ComponentnameComponent extends TheComponent {
     constructor(){
@@ -113,9 +113,9 @@ Once you have those components, you want to render them in the DashboardComponen
 
 Dashboard.snkr
 ```js
-import { initCss, render } from "../../../scripts/sneaker";
-import { FormComponent } from "../Form/Form";
-import { TableComponent } from "../Table/Table";
+import { initCss, render } from "../../../scripts/sneaker.js";
+import { FormComponent } from "../Form/Form.snkr";
+import { TableComponent } from "../Table/Table.snkr";
 
 ...
 // In the init method
@@ -192,7 +192,7 @@ Form.html
 
 Form.snkr
 ```js
-import InputBind from "../../../scripts/models/InputBind";
+import InputBind from "../../../scripts/models/InputBind.js";
 // Other imports
 
 class FormComponent extends TheComponent {
@@ -230,7 +230,7 @@ We know want to bind that button to an action. Lets say we just want to console.
 
 Form.snkr
 ```js
-import { bindButton, ... } from "../../../scripts/sneaker";
+import { bindButton, ... } from "../../../scripts/sneaker.js";
 
 // ...
 
@@ -254,7 +254,7 @@ You can emit data as an event in order to access it in another component. Let's 
 
 Form.snkr
 ```js
-import { bindButton, emit, ... } from "../../../scripts/sneaker";
+import { bindButton, emit, ... } from "../../../scripts/sneaker.js";
 
 // ...
 
@@ -273,7 +273,7 @@ Now it emitted the object under the name 'emitEventName'. In the table component
 
 Table.snkr
 ```js
-import { receive, ... } from "../../../scripts/sneaker";
+import { receive, ... } from "../../../scripts/sneaker.js";
 
 // ...
 tableData = [];
@@ -310,7 +310,7 @@ Define the headers that you need, but leave the tbody blank. Here's how you disp
 
 Table.snkr
 ```js
-import { receive, populateTable, ... } from "../../../scripts/sneaker";
+import { receive, populateTable, ... } from "../../../scripts/sneaker.js";
 
 // ...
 tableData = [];
@@ -339,7 +339,7 @@ Serialize your 'tableData' in localStorage with one simple change:
 
 Table.snkr
 ```js
-import { asLocalStorage, populateTable, ... } from "../../../scripts/sneaker";
+import { asLocalStorage, populateTable, ... } from "../../../scripts/sneaker.js";
 
 // ...
 
