@@ -388,7 +388,7 @@ This structure exports a service instance and makes it available in any file. In
 ```js
 class EmployeeService extends TheService{
     static instance = null;
-    #employeeExaminable; // declare an examinable with a # before the name to make it private
+    employeeExaminable; // declare an examinable
 
     constructor(){
         super();
@@ -396,15 +396,80 @@ class EmployeeService extends TheService{
         if(!EmployeeService.instance){
             Employee.Service.instance = this;
 
-            this.#employeeExaminable = new Examinable(); // instanciate it
+            this.employeeExaminable = new Examinable(); // instantiate it
         }
 
         return EmployeeService.instance;
     }
 
+   updateEmployee(employee){
+      this.employeeExaminable.enter(employee);
+   }
+
 }
 ```
+With this structure you can now manage an employee through the EmployeeService by updating the examinable. But how do you read the data?  
+You read the data by subscribing to the examinable. You can do that in the init method of a component as an example.  
+```js
+import EmployeeService from "../services/EmployeeService.js"
+// ...
+async init(){
+   EmployeeService.employeeExaminable.sneak(
+      (data) => {
+         // ... handle data
+      },
+      (error) => {
+         // ... handle error
+      }
+   )
+}
+```
+The sneak method is the equivalent to subscribe. It takes two callback functions, one for when the gathering of data was successful and the other for handling errors. The error callback is optional though.  
+Now when you want to update the examinable `EmployeeService.updateEmployee(someEmployeeObject)`, the 'enter' methods gets called, which triggers every callback function that was subscribed to the examinable. As long as nothing goes wrong, the enter function will simply deliever the data and no error will occur.  
+There's high potential for error in for example a fetch. Each examinable allows you to fetch data directly from it and you can handle the data in the callback.  
+Example GET Request:
+```js
+testExaminable.sneak(
+   (data) => {
+      console.log(data)
+   }
+)
 
+testExaminable.fetch("https://dummyjson.com/products")
+```
+Now if this GET request is successful, the data will be logged to the console as shown in the callback function. If the fetch fails and throws any error, you can handle that with an error callback in the subscriber:
+```js
+testExaminable.sneak(
+   (data) => {
+      console.log(data)
+   },
+   (error) => {
+      console.log("An error occured " + error)
+   }
+)
+```
+It's pretty similar to a try catch, just a little more encapsulated.  
+Additionally to fetching data, you can open websocket connections. Here's an example:
+```js
+testExaminable.sneak(
+   (data) => {
+      // Receive data from the websocket here
+   }
+)
+
+testExaminable.socket("ws://localhost:8080", onOpenCallback?, onCloseCallback?)
+```
+You can open a websocket connection with an url. Optionally, you can put in callback functions that happen onOpen or onClose of the websocket connection. Then just receive the data sent by the websocket in your subscriber.  
+
+If you want to dispose of your examinable, you can easily unsubscribe it:
+```js
+const unsub = testExaminable.sneak(..)
+
+unsub(); // Call the subscriber to unsubscribe.
+```
+
+
+And remember to subscribe to an examinable first, before completing operations with it.
 
 ## Problem
 The files in the `script` folder were supposed to be uploaded as an npm package to use it in the app. I published a package called 'sneakerlib' which you can now install with `npm i sneakerlib`, but you can't actually use it in sneaker.js. The problem lays within the express server. The express server serves the index.html file on each route and serves other files on routes where they exist. You cann check `application.cjs`. Now, when trying to import a npm package, due to the express server, it can't import it because it searches for it locally.  
@@ -413,4 +478,4 @@ I tried to bundle the application with parcel, but parcel introduces several new
 
 ## Conclusion
 That is the first documentation of sneaker.js and might be expanded upon in the future.   
-(There are a few useful methods not yet documented inside of `/scripts/sneaker.js`)
+There are a few useful methods not yet documented inside of `/scripts/sneaker.js`, which allow easier handling of formdata. You can also find some utility functions inside of `/scripts/utils/utils.js`.
