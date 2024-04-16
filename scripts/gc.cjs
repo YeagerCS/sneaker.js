@@ -3,11 +3,7 @@ const fs = require("fs")
 const path = require("path")
 const componentName = process.argv[2]
 
-const componentExport = `${componentName.toUpperCase()}${componentName.toLowerCase().includes("component") ? "" : "_COMPONENT"}`;
-
-
-const jsTemplate = `import { initCss } from "../../../scripts/sneaker.js";
-import TheComponent from "../../../scripts/models/Component.js";
+const jsTemplate = `import { initCss, TheComponent } from "sneakerlib";
 
 class ${componentName}Component extends TheComponent {
     constructor(){

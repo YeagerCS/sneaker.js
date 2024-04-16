@@ -12,11 +12,10 @@
 - [Display Table Data](#display-table-data)
 - [asLocalStorage](#aslocalstorage)
 - [Examinable](#examinable)
-- [Problem](#problem)
 
 
 ## <p id="sneakerjs">What is sneaker.js</p>
-Sneaker.js is a JavaScript library which inspires features from JavaScript frameworks like React or Angular. It's a light-weight vanilla JavaScript library which allows the use of things like rendering multiple components or routing. The use of the library is very easy and the main features are documented. Each component is a class, which gives it a similar feeling to Angular but it still just is vanilla js. The routing is handled with an express server, which serves the index.html file on any route making it a Single Page Application (SPA).
+Sneaker.js is a JavaScript library which inspires features from JavaScript frameworks like React or Angular. It's a light-weight vanilla JavaScript library which allows the use of things like rendering multiple components or routing. The use of the library is very easy and the main features are documented. Each component is a class, which gives it a similar feeling to Angular but it still just is vanilla js. The app is bundled with webpack. Alternatively, you can start it with an express server that serves index.html at every route (SPA), which with the current configuration isn't functional. Webpack is recommended: `npm start`
 
 ## How to run
 1. Clone this repository  
@@ -26,7 +25,7 @@ Sneaker.js is a JavaScript library which inspires features from JavaScript frame
    npm i
    npm start
    ```
-3. Go to http://127.0.0.1:3000 (or your env port)
+3. Go to http://127.0.0.1:8080 (or your env port)
 
 ## Components
 To start editting the application, you can go to `src/components/App/App.snkr` and modify the routes. In order to have routes, you'll need to generate components.
@@ -36,8 +35,7 @@ To start editting the application, you can go to `src/components/App/App.snkr` a
 This will create a component with a css, html and js file. The js file gets generated with it's base structure:
 
 ```js
-import { initCss, render } from "../../../scripts/sneaker.js";
-import TheComponent from "../../../scripts/models/Component.js";
+import { initCss, render, TheComponent } from "sneakerlib";
 
 class ComponentnameComponent extends TheComponent {
     constructor(){
@@ -113,7 +111,7 @@ Once you have those components, you want to render them in the DashboardComponen
 
 Dashboard.snkr
 ```js
-import { initCss, render } from "../../../scripts/sneaker.js";
+import { initCss, render } from "sneakerlib";
 import { FormComponent } from "../Form/Form.snkr";
 import { TableComponent } from "../Table/Table.snkr";
 
@@ -192,7 +190,7 @@ Form.html
 
 Form.snkr
 ```js
-import InputBind from "../../../scripts/models/InputBind.js";
+import { InputBind } from "sneakerlib";
 // Other imports
 
 class FormComponent extends TheComponent {
@@ -230,7 +228,7 @@ We know want to bind that button to an action. Lets say we just want to console.
 
 Form.snkr
 ```js
-import { bindButton, ... } from "../../../scripts/sneaker.js";
+import { bindButton, ... } from "sneakerlib";
 
 // ...
 
@@ -254,7 +252,7 @@ You can emit data as an event in order to access it in another component. Let's 
 
 Form.snkr
 ```js
-import { bindButton, emit, ... } from "../../../scripts/sneaker.js";
+import { bindButton, emit, ... } from "sneakerlib";
 
 // ...
 
@@ -273,7 +271,7 @@ Now it emitted the object under the name 'emitEventName'. In the table component
 
 Table.snkr
 ```js
-import { receive, ... } from "../../../scripts/sneaker.js";
+import { receive, ... } from "sneakerlib";
 
 // ...
 tableData = [];
@@ -310,7 +308,7 @@ Define the headers that you need, but leave the tbody blank. Here's how you disp
 
 Table.snkr
 ```js
-import { receive, populateTable, ... } from "../../../scripts/sneaker.js";
+import { receive, populateTable, ... } from "sneakerlib";
 
 // ...
 tableData = [];
@@ -339,7 +337,7 @@ Serialize your 'tableData' in localStorage with one simple change:
 
 Table.snkr
 ```js
-import { asLocalStorage, populateTable, ... } from "../../../scripts/sneaker.js";
+import { asLocalStorage, populateTable, ... } from "sneakerlib";
 
 // ...
 
@@ -363,7 +361,7 @@ The simple structure of such a service is the following:
 
 src/services/EmployeeService.js
 ```js
-import TheService from "../../../scripts/models/Service.js";
+import { TheService } from "sneakerlib";
 class EmployeeService extends TheService{
     static instance = null;
 
@@ -470,12 +468,3 @@ unsub(); // Call the subscriber to unsubscribe.
 
 
 And remember to subscribe to an examinable first, before completing operations with it.
-
-## Problem
-The files in the `script` folder were supposed to be uploaded as an npm package to use it in the app. I published a package called 'sneakerlib' which you can now install with `npm i sneakerlib`, but you can't actually use it in sneaker.js. The problem lays within the express server. The express server serves the index.html file on each route and serves other files on routes where they exist. You cann check `application.cjs`. Now, when trying to import a npm package, due to the express server, it can't import it because it searches for it locally.  
-Like if you import `import { v4 } from "uuid"`, it tries to import `127.0.0.1:3000uuid`, which obviously doesn't work.  
-I tried to bundle the application with parcel, but parcel introduces several new problems which basically invalidate half the progress up until this point. I'll try some more things, but for now **you are not able to use npm packages** and you need to use the sneaker.js files from the scripts directory instead of the 'sneakerlib'.
-
-## Conclusion
-That is the first documentation of sneaker.js and might be expanded upon in the future.   
-There are a few useful methods not yet documented inside of `/scripts/sneaker.js`, which allow easier handling of formdata. You can also find some utility functions inside of `/scripts/utils/utils.js`.

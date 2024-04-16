@@ -1,4 +1,4 @@
-import { initialRender } from "./scripts/sneaker.js"
+import { initialRender } from "sneakerlib";
 import { AppComponent } from "./src/components/App/App.snkr"
 
 

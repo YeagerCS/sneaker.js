@@ -1,5 +1,4 @@
-import { initCss } from "../../../scripts/sneaker.ja";
-import TheComponent from "../../../scripts/models/Component.js";
+import { TheComponent, initCss } from "sneakerlib";
 
 class WelcomeComponent extends TheComponent {
     constructor(){

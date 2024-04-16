@@ -1,5 +1,4 @@
-import { enableRoutes, initCss, render } from "../../../scripts/sneaker.js";
-import TheComponent from "../../../scripts/models/Component.js";
+import { TheComponent, enableRoutes, initCss, render } from "sneakerlib";
 import { WelcomeComponent } from "../Welcome/Welcome.snkr";
 import { NotFoundComponent } from "../NotFound/NotFound.snkr";
 
