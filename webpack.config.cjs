@@ -13,6 +13,9 @@ module.exports = {
     } ,
     historyApiFallback: true
   }, 
+  resolve: {
+    extensions: [".js", ".ts", ".snkr", ".sneaker", ".tsnkr", ".tsneaker"]
+  },
   module: { 
     rules: [ 
       { 
