@@ -17,7 +17,7 @@
   "dependencies": {
     "esm": "^3.2.25",
     "express": "^4.19.1",
-    "sneakerlib": "^1.0.7",
+    "sneakerlib": "^1.0.9",
     "webpack": "^5.91.0"
   },
   "devDependencies": {
