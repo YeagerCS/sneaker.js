@@ -29,8 +29,8 @@ if(!serviceName){
     process.exit(1);
 }
 
-const dirPath = path.join(__dirname, "../../src/services", serviceName);
-const servicesDir = path.join(__dirname, "../../src/services")
+const dirPath = path.join(__dirname, "../src/services", serviceName);
+const servicesDir = path.join(__dirname, "../src/services")
 
 try{
     if(!fs.existsSync(servicesDir)){
