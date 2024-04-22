@@ -212,8 +212,57 @@ class FormComponent extends TheComponent {
 }
 ```
 Now the variables nameInput and emailInput are bound to the element with the given id. In order to access the value of the inputs, you'll need to access `this.nameInput.value` and `this.emailInput.value`.
-You have bound your input, now lets print the input on [click of a button](#button-clicks) to check.
+You have bound your input, now lets print the input on [click of a button](#button-clicks) to check. For larger forms you may want a different approach for reading form data. Read the following if you want an alternative.
 
+### Better Form Input
+It can be annoying to define every InputBind individually, that's why sneaker.js has some handy methods for it.
+
+Form.snkr
+```js
+class FormComponent extends TheComponent {
+import { bindButton, bindInputs, TheComponent, validate, values, ... } from "sneakerlib";
+
+   // Define an object for the form data as the following: (The keys have to match the id's in the html input elements)
+   formData = {
+      firstname: null,
+      lastname: null,
+      email: null,
+      dateOfBirth: null,
+      password: null
+   } 
+
+   async init() {
+      // ...
+      bindInputs(this.formData) //Binds each element in the object to the respective input element
+      bindButton("button", (e) => {
+         e.preventDefault();
+         if(validate(this.formData)){ // use validate function to validate the form data
+            const formValues = values(this.formData); // reads out the values from the object and returns an object with the values only
+            // Handle valid form data
+         } else{
+            // Handle invalid form data
+         }
+      })
+   }
+
+   // ...
+}
+```
+- `validate` function definition:
+```js
+const validate = (inputObj, 
+  pwRegex = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/g,
+  pwKey = "password", emailKey = "email"
+) 
+```
+Predefined password Regular Expression and the email gets checked aswell. You can define the pwRegex yourself, this one checks for:
+- at least 8 characters
+- at least one capital letter
+- at least one number
+- at least one special symbol
+  
+Don't forget to modify the pwKey or emailKey if you have different id's in your input elements.
+If say you want to change the emailkey but not the pwRegex or key, call the function like `validate(formData, undefined, undefined, myEmailKey)`
 
 ## Button Clicks
 Button clicks can be configured quite easily. Lets take the form again and add a button with the id 'btn':
@@ -465,6 +514,8 @@ const unsub = testExaminable.sneak(..)
 
 unsub(); // Call the subscriber to unsubscribe.
 ```
+And remember to subscribe to an examinable first, before completing operations with it.  
 
 
-And remember to subscribe to an examinable first, before completing operations with it.
+## Conclusion
+This documentation is not entirely finished, some function are not yet documented. You can check out the source code to possibly gain an understanding at https://www.npmjs.com/package/sneakerlib.
