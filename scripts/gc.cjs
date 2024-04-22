@@ -27,8 +27,8 @@ if(!componentName){
     process.exit(1)
 }
 
-const dirPath = path.join(__dirname, '../../src/components', componentName)
-const componentsDir = path.join(__dirname, "../../src/components");
+const dirPath = path.join(__dirname, '../src/components', componentName)
+const componentsDir = path.join(__dirname, "../src/components");
 
 try{
     if (!fs.existsSync(componentsDir)) {
