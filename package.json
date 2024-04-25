@@ -9,7 +9,7 @@
     "gc": "node scripts/gc.cjs",
     "gs": "node scripts/gs.cjs",
     "build": "webpack watch",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open --port 9875"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +17,7 @@
   "dependencies": {
     "esm": "^3.2.25",
     "express": "^4.19.1",
-    "sneakerlib": "^1.0.9",
+    "sneakerlib": "^1.0.13",
     "webpack": "^5.91.0"
   },
   "devDependencies": {
