@@ -525,14 +525,16 @@ bindButton("btn", () => {
    navigate("/dashboard");
 })
 ```
-This will simply route to the /dashboard route which you specified in App.snkr. If you need to pass state from the initial component to the one you're navigating to, you can easily do that with the navigate function, which takes state as an optional parameter. Let's say you share data from a Login component to a dashboard.
+This will simply route to the /dashboard route which you specified in App.snkr. If you need to pass state from the initial component to the one you're navigating to, you can easily do that with the navigate function, which takes state as an optional parameter. Let's say you share data from a Login component to a dashboard.  
+
 Login.snkr
 ```js
 navigate("/dashboard", {
    user: this.user.value // An example InputBind in the Component
 })
 ```
-You can now receive the state in the dashboard component like this:
+You can now receive the state in the dashboard component like this:  
+
 Dashboard.snkr
 ```js
 import { getNavigateState, ... } from "sneakerlib"
