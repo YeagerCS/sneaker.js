@@ -12,6 +12,7 @@
 - [Display Table Data](#display-table-data)
 - [asLocalStorage](#aslocalstorage)
 - [Examinable](#examinable)
+- [Navigation](#navigation)
 
 
 ## <p id="sneakerjs">What is sneaker.js</p>
@@ -139,6 +140,11 @@ The router is placed in `App.snkr` and you need to configure your routes there. 
 
 ```js
 // imports
+
+const routes = {
+   "/": WelcomeComponent
+}
+
 class AppComponent extends TheComponent{
     constructor(){
         super()
@@ -150,16 +156,12 @@ class AppComponent extends TheComponent{
         await initCss("App.css")
 
         this.routes();
-        enableRoutes(this.routes)
+        enableRoutes(routes, this.routes)
     }
 
 
     async routes(){
         const path = window.location.pathname;
-
-        const routes = {
-            "/": WelcomeComponent
-        }
           
         await render(routes[path] ?? NotFoundComponent, "router")
     }
@@ -169,16 +171,10 @@ export { AppComponent }
 You'll only need to consider the `routes()` method. Lets display the Dashboard at the '/dashboard' route.
 
 ```js
- async routes(){
-        const path = window.location.pathname;
-
-        const routes = {
-            "/": WelcomeComponent,
-            "/dashboard": DashboardComponent
-        }
-          
-        await render(routes[path] ?? NotFoundComponent, "router")
-    }
+const routes = {
+   "/": WelcomeComponent,
+   "/dashboard": DashboardComponent
+}       
 ```
 By simply adding the route "/dashboard" with the value of the component, the given component is rendered dependent on the route. If the route that you're trying to access is undefined, on default the NotFoundComponent will be rendered. Replace that with any component you want.  
 Great! Now you're rendering the Dashboard on the page. You're still missing some logic though. Learn how to handle inputs in a form [Here](#form-input)
@@ -520,6 +516,39 @@ const unsub = testExaminable.sneak(..)
 unsub(); // Call the subscriber to unsubscribe.
 ```
 And remember to subscribe to an examinable first, before completing operations with it.  
+
+## Navigation
+In order to build functional applications you'll need to have the ability to navigate to other routes. For that, the `navigate` function was implemented. Here's and example use case.
+```js
+// Some button click
+bindButton("btn", () => {
+   navigate("/dashboard");
+})
+```
+This will simply route to the /dashboard route which you specified in App.snkr. If you need to pass state from the initial component to the one you're navigating to, you can easily do that with the navigate function, which takes state as an optional parameter. Let's say you share data from a Login component to a dashboard.
+Login.snkr
+```js
+navigate("/dashboard", {
+   user: this.user.value // An example InputBind in the Component
+})
+```
+You can now receive the state in the dashboard component like this:
+Dashboard.snkr
+```js
+import { getNavigateState, ... } from "sneakerlib"
+
+class DashboardComponent extends TheComponent {
+   // ...
+   navigationState = getNavigateState()
+
+   async init() {
+      // Access the user that was given by the state
+      console.log(navigationState.user)
+   }
+
+}
+```
+And that's how you can navigate and share state within the navigation process.
 
 
 ## Conclusion
