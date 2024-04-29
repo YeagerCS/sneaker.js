@@ -131,7 +131,7 @@ async init(){
 }
 ```
 This will render the FormComponent in the 'form' div and the TableComponent in the 'table' div.  
-You successfully rendered two components inside another! Now you just have to display that dashboard on your site. In order for that to work, you'll need to configure your Dashboard with [Routing](#routing).
+You successfully rendered two components inside another! Now you just have to display that dashboard on your site. In order for that to work, you'll need to configure your Dashboard with [Routing](#routing). **Attention:** Rendering components only works for files that are placed in /src/components, other html files will not render. Each component has to be it's own folder inside of the components folder. 
 
 
 
