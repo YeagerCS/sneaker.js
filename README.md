@@ -13,6 +13,7 @@
 - [asLocalStorage](#aslocalstorage)
 - [Examinable](#examinable)
 - [Navigation](#navigation)
+- [Utilities](#utilities)
 
 
 ## <p id="sneakerjs">What is sneaker.js</p>
@@ -551,6 +552,74 @@ class DashboardComponent extends TheComponent {
 }
 ```
 And that's how you can navigate and share state within the navigation process.
+
+## Utilities
+### capitalize
+**Description:** Capitalizes the first letter of a string.
+
+**Parameters:**
+- `str` (string): The input string.
+
+**Returns:**
+- (string): The input string with the first letter capitalized.
+
+### flatten
+**Description:** Flattens a nested array structure into a single-level array.
+
+**Parameters:**
+- `arr` (array): The nested array structure.
+
+**Returns:**
+- (array): The flattened array.
+
+### formatDate
+**Description:** Formats a date object into a string based on the provided format.
+
+**Parameters:**
+- `date` (Date): The date object to format.
+- `format` (string): The format string. It can contain placeholders like "yyyy" for year, "mm" for month, "dd" for day, "hh" for hours, "ii" for minutes, and "ss" for seconds.
+
+**Returns:**
+- (string): The formatted date string.
+
+### formatCurrency
+**Description:** Formats a number as currency.
+
+**Parameters:**
+- `number` (number): The number to format.
+- `currency` (string, optional): The currency code. Default is "USD".
+
+**Returns:**
+- (string): The formatted currency string.
+
+### roundDecimals
+**Description:** Rounds a number to a specified number of decimal places.
+
+**Parameters:**
+- `number` (number): The number to round.
+- `decimal` (number): The number of decimal places to round to.
+
+**Returns:**
+- (number): The rounded number.
+
+### isEmpty
+**Description:** Checks if an object is empty (has no own enumerable properties).
+
+**Parameters:**
+- `obj` (object): The object to check.
+
+**Returns:**
+- (boolean): `true` if the object is empty, `false` otherwise.
+
+### mergeObjects
+**Description:** Merges two objects into a new object.
+
+**Parameters:**
+- `obj1` (object): The first object to merge.
+- `obj2` (object): The second object to merge.
+
+**Returns:**
+- (object): The merged object containing properties from both input objects. If there are overlapping keys, the values from `obj2` will overwrite those from `obj1`.
 
 
 ## Conclusion
