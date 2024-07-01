@@ -623,4 +623,4 @@ And that's how you can navigate and share state within the navigation process.
 
 
 ## Conclusion
-This documentation is not entirely finished, some function are not yet documented. You can check out the source code to possibly gain an understanding at https://www.npmjs.com/package/sneakerlib.
+This documentation is not entirely finished, some functions are not yet documented. You can check out the source code of the library with some new functions [here](https://github.com/YeagerCS/sneakerlib).
