@@ -5,6 +5,7 @@
 - [How to run](#how-to-run)
 - [Components](#components)
 - [Rendering Components](#rendering-components)
+- [Multirender](#multirender)
 - [Routing](#routing)
 - [Form Input](#form-input)
 - [Button Clicks](#button-clicks)
@@ -134,7 +135,72 @@ async init(){
 This will render the FormComponent in the 'form' div and the TableComponent in the 'table' div.  
 You successfully rendered two components inside another! Now you just have to display that dashboard on your site. In order for that to work, you'll need to configure your Dashboard with [Routing](#routing). **Attention:** Rendering components only works for files that are placed in /src/components, other html files will not render. Each component has to be it's own folder inside of the components folder. 
 
+## Multirender
+Multirender allows to render a list with a html template for each object.  
+First, you create your Template. I'm going to call mine 'MovieList' with an example.
+MovieList.html
+```html
+<section class="movie-section" id="movie-section">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <img src="" id="poster">
+    </div>
+    <h3 id="title" style="text-align: center;"></h3>
+    <div class="movie-details">
+        <p id="year"></p>
+        <p>•</p>
+        <p id="genre"></p>
+        <p>•</p>
+        <div style="display: flex;">
+            <p id="duration"></p>
+            <p>min</p>
+        </div>
+    </div>
+</section>
+```
+Before we write code in the MovieList, we'll render the list multiple times in another component. For that I'll create a component DisplayMovies:
+```html
+<div class="wrapper">
+    <h1>All Movies</h1>
+    <div id="list"></div>
+</div>
+```
+In this component we can fetch data and then render it into the component that we created before multiple times. Let's say I have some movies that i fetch and want to render them in the fashion of my template. For that we can use the method 'multiRender'.
+```js
+async init(){
+        await initCss("DisplayMovies.css");
+        const response = await fetch("/api/movie")
+        const movies = await response.json();
+        movies.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded))
+        
+        await multiRender(MovieListComponent, "list", movies)
+}
+```
+The first parameter is the template component, the second is into which you want to render it, the third is the list of object to render. This now renders every object in the list in one template and displays it on the page. Of course, you can design your template with css, and also your list to display the objects.
+In the template you have to write the data to the html elements.
+MovieList.js
+```js
+ async init(){
+        await initCss("MovieList.css");
+        console.log(this.state);
 
+        multiRenderWriteText(this.state, "title")
+        multiRenderWriteText(this.state, "year")
+        multiRenderWriteText(this.state, "genre")
+        multiRenderWriteText(this.state, "duration")
+        multiRenderWriteImageSrc(this.state, "poster")
+
+        multiRenderClick(this.state, "movie-section",  () => {
+            if(!this.state.mrItem.tmdb){
+                navigate("/display", { state: this.state.mrItem.id })
+            } else{
+                navigate("/displayTMDB", { state: this.state.mrItem })
+            }
+        })
+    }
+```
+You can use the multiRenderWriteText function to write text easily. The object key and the id specified have to match exactly for this to write data. With multiRenderWriteImageSrc, you can write a src to an image that you're trying to render. multiRenderClick is a click event for the rendered item. When the item is clicked, you can call your callback in that method. You can access the current objects state with this.state.mrItem. This is always true for a multirender. With the { state: ... } in the navigate I pass the current movie like that into state.
+
+In conclusion, multiRender is a very useful function allowing you to render an array of objects with specific keys. The render commences by creating a div for each and every object and specifying a class with a random uuid() for that div.
 
 ## Routing
 The router is placed in `App.snkr` and you need to configure your routes there. The default structure of the AppComponent is as follows:
