@@ -2,10 +2,11 @@
 const fs = require("fs")
 const path = require("path")
 const componentName = process.argv[2]
+const componentClassname = componentName + componentName.toLowerCase().endsWith("component") ? "" : "Component"
 
-const jsTemplate = `import { initCss, TheComponent } from "sneakerlib";
+const jsTemplate = `import { initCss, SnkrComponent } from "sneakerlib";
 
-class ${componentName}Component extends TheComponent {
+class ${componentClassname} extends SnkrComponent {
     constructor(){
         super();
     }
@@ -18,7 +19,7 @@ class ${componentName}Component extends TheComponent {
     }
 }
 
-export { ${componentName}Component };
+export { ${componentClassname} };
 `;
 
 

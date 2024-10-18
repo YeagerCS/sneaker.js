@@ -1,11 +1,10 @@
 {
   "name": "sneaker.js",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "express": "node -r esm application.cjs",
     "gc": "node scripts/gc.cjs",
     "gs": "node scripts/gs.cjs",
     "build": "webpack watch",
@@ -15,9 +14,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "esm": "^3.2.25",
-    "express": "^4.19.1",
-    "sneakerlib": "^1.0.13",
+    "sneakerlib": "^1.2.2",
+    "ts-loader": "^9.5.1",
     "webpack": "^5.91.0"
   },
   "devDependencies": {
