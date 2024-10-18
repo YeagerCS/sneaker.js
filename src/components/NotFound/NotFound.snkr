@@ -1,6 +1,6 @@
-import { TheComponent, initCss } from "sneakerlib";
+import { SnkrComponent, initCss } from "sneakerlib";
 
-class NotFoundComponent extends TheComponent {
+class NotFoundComponent extends SnkrComponent {
     constructor(){
         super();
     }

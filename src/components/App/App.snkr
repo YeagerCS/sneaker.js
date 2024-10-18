@@ -1,4 +1,4 @@
-import { TheComponent, enableRoutes, initCss, render } from "sneakerlib";
+import { SnkrComponent, enableRoutes, initCss, render } from "sneakerlib";
 import { WelcomeComponent } from "../Welcome/Welcome.snkr";
 import { NotFoundComponent } from "../NotFound/NotFound.snkr";
 
@@ -6,7 +6,7 @@ const routes = {
     "/": WelcomeComponent
 } 
 
-class AppComponent extends TheComponent{
+class AppComponent extends SnkrComponent{
     constructor(){
         super()
     }

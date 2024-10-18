@@ -1,27 +1,27 @@
 const fs = require("fs")
 const path = require("path")
 const serviceName = process.argv[2]
+const serviceClassname = serviceName + serviceName.toLowerCase().endsWith("service") ? "": "Service"
 
-
-const jsTemplate = `import { TheService } from "sneakerlib";
-class ${serviceName}Service extends TheService{
+const jsTemplate = `import { SnkrService } from "sneakerlib";
+class ${serviceClassname} extends SnkrService{
     static instance = null;
 
     constructor(){
         super();
 
-        if(!${serviceName}Service.instance){
-            ${serviceName}Service.instance = this;
+        if(!${serviceClassname}.instance){
+            ${serviceClassname}.instance = this;
 
             // Initialization logic here
         }
 
-        return ${serviceName}Service.instance;
+        return ${serviceClassname}.instance;
     }
 
 }
 
-export default new ${serviceName}Service();
+export default new ${serviceClassname}();
 `;
 
 if(!serviceName){
