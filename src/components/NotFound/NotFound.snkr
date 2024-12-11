@@ -1,4 +1,5 @@
 import { SnkrComponent, initCss } from "sneakerlib";
+import "./NotFound.css"
 
 class NotFoundComponent extends SnkrComponent {
     constructor(){
@@ -8,7 +9,6 @@ class NotFoundComponent extends SnkrComponent {
     name = "NotFound.html";
 
     async init(){
-        await initCss("NotFound.css");
     }
 }
 

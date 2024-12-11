@@ -1,0 +1,19 @@
+import { SnkrService } from "sneakerlib";
+class {{SERVICE_CLASSNAME}} extends SnkrService{
+    static instance = null;
+
+    constructor(){
+        super();
+
+        if(!{{SERVICE_CLASSNAME}}.instance){
+            {{SERVICE_CLASSNAME}}.instance = this;
+
+            // Initialization logic here
+        }
+
+        return {{SERVICE_CLASSNAME}}.instance;
+    }
+
+}
+
+export default new {{SERVICE_CLASSNAME}}();

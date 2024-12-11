@@ -1,4 +1,5 @@
-import { initCss, SnkrComponent } from "sneakerlib";
+import { SnkrComponent, initCss } from "sneakerlib";
+import "./Welcome.css"
 
 class WelcomeComponent extends SnkrComponent {
     constructor(){
@@ -8,7 +9,6 @@ class WelcomeComponent extends SnkrComponent {
     name = "Welcome.html";
 
     async init(){
-        await initCss("Welcome.css");
     }
 }
 

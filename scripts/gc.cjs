@@ -2,25 +2,15 @@
 const fs = require("fs")
 const path = require("path")
 const componentName = process.argv[2]
-const componentClassname = componentName + componentName.toLowerCase().endsWith("component") ? "" : "Component"
+const componentClassname = componentName + (componentName.toLowerCase().endsWith("component") ? "" : "Component")
 
-const jsTemplate = `import { initCss, SnkrComponent } from "sneakerlib";
+const templatePath = path.join(__dirname, "component.template.js.snippet")
 
-class ${componentClassname} extends SnkrComponent {
-    constructor(){
-        super();
-    }
+console.log("componentClassname", componentClassname)
 
-    name = "${componentName}.html";
-
-    async init(){
-        await initCss("${componentName}.css");
-        // Your initialization logic
-    }
-}
-
-export { ${componentClassname} };
-`;
+const jsTemplate = fs.readFileSync(templatePath, "utf-8")
+            .replace(/{{COMPONENT_CLASSNAME}}/g, componentClassname)
+            .replace(/{{COMPONENT_NAME}}/g, componentName);
 
 
 if(!componentName){

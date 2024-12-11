@@ -1,28 +1,12 @@
 const fs = require("fs")
 const path = require("path")
 const serviceName = process.argv[2]
-const serviceClassname = serviceName + serviceName.toLowerCase().endsWith("service") ? "": "Service"
+const serviceClassname = serviceName + (serviceName.toLowerCase().endsWith("service") ? "": "Service")
 
-const jsTemplate = `import { SnkrService } from "sneakerlib";
-class ${serviceClassname} extends SnkrService{
-    static instance = null;
+const templatePath = path.join(__dirname, "service.template.js.snippet")
 
-    constructor(){
-        super();
-
-        if(!${serviceClassname}.instance){
-            ${serviceClassname}.instance = this;
-
-            // Initialization logic here
-        }
-
-        return ${serviceClassname}.instance;
-    }
-
-}
-
-export default new ${serviceClassname}();
-`;
+const jsTemplate = fs.readFileSync(templatePath, "utf-8")
+            .replace(/{{SERVICE_CLASSNAME}}/g, serviceClassname)
 
 if(!serviceName){
     console.error("Please provide a name for your service");

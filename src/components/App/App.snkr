@@ -1,6 +1,7 @@
 import { SnkrComponent, enableRoutes, initCss, render } from "sneakerlib";
 import { WelcomeComponent } from "../Welcome/Welcome.snkr";
 import { NotFoundComponent } from "../NotFound/NotFound.snkr";
+import "./App.css"
 
 const routes = {
     "/": WelcomeComponent

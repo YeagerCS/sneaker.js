@@ -43,7 +43,8 @@ To start editting the application, you can go to `src/components/App/App.snkr` a
 This will create a component with a css, html and js file. The js file gets generated with it's base structure:
 
 ```js
-import { initCss, render, TheComponent } from "sneakerlib";
+import { render, TheComponent } from "sneakerlib";
+import "./Componentname.css"
 
 class ComponentnameComponent extends TheComponent {
     constructor(){
@@ -53,7 +54,6 @@ class ComponentnameComponent extends TheComponent {
     name = "Componentname.html";
 
     async init(){
-        await initCss("Componentname.css");
         // Your initialization logic
     }
 }
@@ -258,7 +258,7 @@ Form.html
 
 Form.snkr
 ```js
-import { InputBind } from "sneakerlib";
+import { SyncText } from "sneakerlib";
 // Other imports
 
 class FormComponent extends TheComponent {
@@ -273,8 +273,8 @@ class FormComponent extends TheComponent {
 
   async init(){
     // ...
-    this.nameInput = new InputBind("name")
-    this.emailInput = new InputBind("email")
+    this.nameInput = new SyncText("name")
+    this.emailInput = new SyncText("email")
   }
   // ...
 }
@@ -283,7 +283,7 @@ Now the variables nameInput and emailInput are bound to the element with the giv
 You have bound your input, now lets print the input on [click of a button](#button-clicks) to check. For larger forms you may want a different approach for reading form data. Read the following if you want an alternative.
 
 ### Better Form Input
-It can be annoying to define every InputBind individually, that's why sneaker.js has some handy methods for it.
+It can be annoying to define every SyncText individually, that's why sneaker.js has some handy methods for it.
 
 Form.snkr
 ```js
@@ -356,8 +356,8 @@ submitForm(e){
 
 async init(){
   // ...
-  this.nameInput = new InputBind("name")
-  this.emailInput = new InputBind("email")
+  this.nameInput = new SyncText("name")
+  this.emailInput = new SyncText("email")
   bindButton("btn", submitForm)
 }
 ```
@@ -597,7 +597,7 @@ This will simply route to the /dashboard route which you specified in App.snkr. 
 Login.snkr
 ```js
 navigate("/dashboard", {
-   user: this.user.value // An example InputBind in the Component
+   user: this.user.value // An example SyncText in the Component
 })
 ```
 You can now receive the state in the dashboard component like this:  

@@ -7,22 +7,17 @@
   "scripts": {
     "gc": "node scripts/gc.cjs",
     "gs": "node scripts/gs.cjs",
-    "build": "webpack watch",
-    "start": "webpack serve --open --port 9875"
+    "start": "vite",
+    "build": "vite build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "sneakerlib": "^1.2.2",
-    "ts-loader": "^9.5.1",
-    "webpack": "^5.91.0"
+    "sneakerlib": "^1.2.6",
+    "ts-loader": "^9.5.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.4",
-    "@babel/preset-env": "^7.24.4",
-    "babel-loader": "^9.1.3",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "vite": "^6.0.3"
   }
 }
